@@ -8,3 +8,15 @@ before_install:
 
 script:
     - docker run -e CI=true arthurbonini/docker-react-travisci-aws npm run test
+
+deploy:
+    provider: elasicbeanstalk
+    region: "us-east-2"
+    app: "docker-react-travisci-aws"
+    env: "DockerReactTravisciAws-env"
+    bucket_name: "elasticbeanstalk-us-east-2-693494208757"
+    bucket_path: "docker-react-travisci-aws"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
